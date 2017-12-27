@@ -94,15 +94,14 @@ test('POST to /reset-password when updatePassword fails responds with 500', (t) 
 });
 
 function stubOptions() {
-	return {
-		sendMail: sinon.stub(),
-		validateUserEmail: sinon.stub(),
-		generatePasswordResetToken: sinon.stub(),
-		setUserPasswordResetToken: sinon.stub(),
-		validatePasswordResetToken: sinon.stub(),
-		validatePassword: sinon.stub(),
-		updatePassword: sinon.stub()
-	};
+	return ['sendMail',
+		'validateUserEmail',
+		'generatePasswordResetToken',
+		'setUserPasswordResetToken',
+		'validatePasswordResetToken',
+		'validatePassword',
+		'updatePassword'
+	].reduce((acc, key) => ({...acc, [key]: sinon.stub()}), {});
 }
 
 function setupApp() {
